@@ -6,19 +6,16 @@
     <script src="script.js"></script>
   </head>
 <body>
-  <h1>Games:</h1>
-  <h2>
-    Guessing a number
-  </h2>
-  <p>
-    <a href="guess-game/index.html" target="_blank"> Русская версия </a>
-  </p>
-  <p>
-    <a href="guess-game/en/index.html" target="_blank"> English version </a>
-  </p>
+  <h1>Guess game</h1>
+  <h2>Guessing a number</h2>
+  <p></p>
   <p>
     <b>Credits:</b>
     <a href="https://github.com/we1tor" target="_blank"> https://github.com/we1tor</a>
   </p>
- 
+  <form onsubmit="return checkGuess()">
+    <label for="guess">My Guess</label>
+    <input type="number" id ="guess">
+    <input type="submit" id="submitGuess" value="Check my Guess">
+  </form>
 </body>
