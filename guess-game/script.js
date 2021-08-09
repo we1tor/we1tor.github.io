@@ -1,15 +1,25 @@
 
 var guess = 0; // Number, номер попытки
-var secretNumber = getRandomNumber(1, 10);
+var minNumber = 1;
+var maxNumber = 20;
+var attempts = 3;//кол-во попыток
+var secretNumber = getRandomNumber(minNumber, maxNumber);
+
+// все, что внутри блока выполняется когда наш документ html полностью загружен
+// и тогда можно изменять свойства элементов
+$(function(){
+    var welcomeEl = document.getElementById('welcome');
+    welcomeEl.innerText = 'Тебе нужно угадать число от '+ minNumber + ' до '+ maxNumber;
+});
 
 function getRandomNumber(from, to) {
-    var randomNumber = Math.floor(Math.random() * (to-from+1)) + from; // 0..1 -> 1..10 ?
+    var randomNumber = Math.floor(Math.random() * (to-from+1)) + from;
     return randomNumber;
 }
 
 function startNewGame () {
     guess = 0;
-    secretNumber = getRandomNumber(1, 10);
+    secretNumber = getRandomNumber(minNumber, maxNumber);
 }
 
 function checkGuess() {
@@ -21,13 +31,13 @@ function checkGuess() {
         return false;
     }
 
-    if (x < 1 || x > 10) {
-        alert('Введите число от 1 до 10');
+    if (x < minNumber || x > maxNumber) {
+        alert('Введите число от '+ minNumber + ' до '+ maxNumber);
         return false;
     }
 
     guess = guess + 1;
-    if (guess > 3) {
+    if (guess > attempts) {
         // истекли попытки, новая игра, сбрасываем число попыток
         alert('Игра закончена! Попробуйте заново');
         startNewGame();
