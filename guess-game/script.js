@@ -1,15 +1,32 @@
 
 var guess = 0; // Number, номер попытки
 var minNumber = 1;
-var maxNumber = 20;
+var maxNumber = 2;
 var attempts = 3;//кол-во попыток
 var secretNumber = getRandomNumber(minNumber, maxNumber);
+
+function updateRemainAttempts() {
+    var attemptsEl = document.getElementById('attempts');
+    var remains = attempts - guess;
+    var remainsText = 'Осталось: ' + remains + ' ';
+    if (remains == 1) {
+        remainsText += 'попытка';
+    } else if(remains % 5 == 0) {
+        remainsText += 'попыток';
+    } else {
+        remainsText += 'попытки';
+    }
+
+    attemptsEl.innerText = remainsText;
+}
 
 // все, что внутри блока выполняется когда наш документ html полностью загружен
 // и тогда можно изменять свойства элементов
 $(function(){
     var welcomeEl = document.getElementById('welcome');
     welcomeEl.innerText = 'Тебе нужно угадать число от '+ minNumber + ' до '+ maxNumber;
+
+    updateRemainAttempts();
 });
 
 function getRandomNumber(from, to) {
@@ -53,6 +70,7 @@ function checkGuess() {
             startNewGame();
         }
     }
+    updateRemainAttempts();
     
     return false;
 }
